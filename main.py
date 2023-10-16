@@ -6,7 +6,7 @@ from scoreboard import Scoreboard
 
 screen = Screen()
 player = Player()
-
+car = CarManager()
 level = Scoreboard()
 
 screen.setup(width=600, height=600)
@@ -15,14 +15,17 @@ screen.listen()
 
 screen.onkeypress(player.move, "Up")
 
-
 game_is_on = True
+
+level.update_scoreboard()
+
 while game_is_on:
     time.sleep(0.1)
     screen.update()
 
+    if player.ycor() >= 275:
+        level.update_level()
+
     player.next_level()
 
-    # not working
-    # if player.ycor() >= 280:
-    #     level.update_level()
+screen.exitonclick()
