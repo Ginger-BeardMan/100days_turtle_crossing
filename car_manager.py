@@ -2,11 +2,8 @@ from turtle import Turtle
 import random
 
 COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
-
 STARTING_MOVE_DISTANCE = 5
-
 MOVE_INCREMENT = 10
-
 STARTING_Y_POSITIONS = []
 
 for i in range(25):
@@ -26,6 +23,7 @@ class CarManager(Turtle):
         super().__init__()
         self.speed('fastest')
         self.create_car()
+        self.movement_speed = STARTING_MOVE_DISTANCE
 
     def create_car(self):
         self.penup()
@@ -36,7 +34,7 @@ class CarManager(Turtle):
         self.goto(random.choice(STARTING_X_POSITIONS), random.choice(STARTING_Y_POSITIONS))
 
     def move_car(self):
-        self.fd(MOVE_INCREMENT)
+        self.fd(self.movement_speed)
 
     def car_color(self):
         car_color = random.choice(COLORS)
@@ -44,3 +42,6 @@ class CarManager(Turtle):
 
     def reset_position(self):
         self.goto(310, random.choice(STARTING_Y_POSITIONS))
+
+    def increase_speed(self):
+        self.movement_speed += MOVE_INCREMENT
