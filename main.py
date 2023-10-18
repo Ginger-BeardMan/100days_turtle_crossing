@@ -21,7 +21,7 @@ game_is_on = True
 
 level.update_scoreboard()
 
-for i in range(30):
+for i in range(40):
     new_car = CarManager()
     garage.append(new_car)
 
@@ -34,13 +34,16 @@ while game_is_on:
         if car.xcor() <= -310:
             car.reset_position()
 
-        if player.distance(car) < 10:
+        if player.ycor() >= 275:
+            car.increase_speed()
+
+        if player.distance(car) <= 10:
             level.game_over()
             game_is_on = False
 
     if player.ycor() >= 275:
         level.update_level()
 
-    player.next_level()
+    player.level_start_position()
 
 screen.exitonclick()
